@@ -1,18 +1,14 @@
 package fr.cmm.service;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.PriorityQueue;
-
-import javax.inject.Inject;
-
-import org.bson.types.ObjectId;
-import org.jongo.MongoCollection;
-import org.jongo.MongoCursor;
-import org.springframework.stereotype.Service;
-
 import fr.cmm.domain.Recipe;
 import fr.cmm.helper.PageQuery;
+import org.bson.types.ObjectId;
+import org.jongo.MongoCollection;
+import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
+import java.util.Iterator;
+import java.util.List;
 
 @Service
 public class RecipeService {

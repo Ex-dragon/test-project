@@ -1,19 +1,17 @@
 package fr.cmm.controller;
 
-import javax.inject.Inject;
-
 import fr.cmm.controller.form.SearchForm;
+import fr.cmm.helper.Columns;
 import fr.cmm.helper.PageQuery;
 import fr.cmm.helper.Pagination;
+import fr.cmm.service.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import fr.cmm.helper.Columns;
-import fr.cmm.service.RecipeService;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Controller
@@ -37,7 +35,12 @@ public class IndexController {
     @RequestMapping("/recettes")
     public String recettes(SearchForm searchForm, ModelMap model) {
         PageQuery pageQuery = new PageQuery();
-        pageQuery.setIndex(searchForm.getPageIndex() - 1);
+
+        if (searchForm.getPageIndex() <= 0) {
+            pageQuery.setIndex(0);
+        } else {
+            pageQuery.setIndex(searchForm.getPageIndex() - 1);
+        }
         pageQuery.setTag(searchForm.getTag());
 
         Pagination pagination = new Pagination();
@@ -47,6 +50,7 @@ public class IndexController {
 
         model.put("recipes", recipeService.findByQuery(pageQuery));
         model.put("pagination", pagination);
+        model.put("request", searchForm);
 
         return "recettes";
     }
@@ -77,7 +81,7 @@ public class IndexController {
 
     @RequestMapping("/contact")
     public String contact() {
-        return "contac";
+        return "contact";
     }
 
     @RequestMapping("/mentions-legales")
