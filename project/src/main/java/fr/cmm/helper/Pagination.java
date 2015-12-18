@@ -40,19 +40,19 @@ public class Pagination {
 
     public List<Integer> getPages() {
         List<Integer> listesPages = new ArrayList<>();
-        if (pageIndex <=4 && count <10) {
+        if (pageIndex <=4 && this.getPageCount() <=10) {
 
-            for (int i = 1 ; i<count ; i++){
+            for (int i = 1 ; i<this.getPageCount() ; i++){
                 listesPages.add(i);
             }
 
-        } else { if (pageIndex > 4 && count - pageIndex < 5) {
+        } else { if (pageIndex > 4 && this.getPageCount() - pageIndex < 5) {
 
-            for (int i = pageIndex - 4; i < count+1; i++) {
+            for (int i = pageIndex - 4; i < this.getPageCount()+1; i++) {
                 listesPages.add(i);
             }
 
-        } else { if (pageIndex > 4 && count - pageIndex > 5){
+        } else { if (pageIndex > 4 && this.getPageCount() - pageIndex > 5){
             for (int i = pageIndex - 4 ; i<pageIndex + 6 ; i++){
                 listesPages.add(i);
             }

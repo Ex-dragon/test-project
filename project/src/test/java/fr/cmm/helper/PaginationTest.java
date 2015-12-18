@@ -40,7 +40,8 @@ public class PaginationTest {
     @Test
     public void getPagesInf4Inf10() {
         Pagination pagination = new Pagination();
-        pagination.setCount(9);
+        pagination.setCount(45);
+        pagination.setPageSize(5);
         pagination.setPageIndex(3);
         Assert.assertEquals(asList(1, 2, 3, 4, 5, 6, 7, 8), pagination.getPages());
 
@@ -49,7 +50,8 @@ public class PaginationTest {
     @Test
     public void getPagesSup4Inf10() {
         Pagination pagination = new Pagination();
-        pagination.setCount(9);
+        pagination.setCount(45);
+        pagination.setPageSize(5);
         pagination.setPageIndex(5);
         Assert.assertEquals( asList(1, 2, 3, 4, 5, 6, 7, 8, 9), pagination.getPages());
 
@@ -58,7 +60,8 @@ public class PaginationTest {
     @Test
     public void getPagesSup4Sup10ProcheBout() {
         Pagination pagination = new Pagination();
-        pagination.setCount(15);
+        pagination.setCount(75);
+        pagination.setPageSize(5);
         pagination.setPageIndex(12);
         Assert.assertEquals(asList(8, 9, 10, 11, 12, 13, 14, 15), pagination.getPages());
 
@@ -67,7 +70,8 @@ public class PaginationTest {
     @Test
     public void getPagesSup4Sup10LoinBout() {
         Pagination pagination = new Pagination();
-        pagination.setCount(25);
+        pagination.setCount(500);
+        pagination.setPageSize(5);
         pagination.setPageIndex(12);
         Assert.assertEquals(asList(8, 9, 10, 11, 12, 13, 14, 15, 16, 17), pagination.getPages());
 
