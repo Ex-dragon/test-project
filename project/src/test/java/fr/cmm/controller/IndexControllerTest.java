@@ -14,13 +14,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.inject.Inject;
-
 import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -64,6 +61,16 @@ public class IndexControllerTest {
                 .andExpect(status().is(200))
                 .andExpect(model().attributeExists("recipe"))
                 .andExpect(view().name("recette"));
+    }
+
+    @Test
+    public void recetteInconnue() throws Exception {
+        String id = "56375619d4c603aa4eb412af";
+
+        Mockito.when(recipeService.findById(id)).thenReturn(null);
+
+        mockMvc.perform(get("/recette/" + id))
+                .andExpect(status().is(404));
     }
 
     @Test

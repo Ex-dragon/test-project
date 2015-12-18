@@ -74,10 +74,30 @@ public class IndexController {
 
     @RequestMapping("/recette/{id}")
     public String recette(@PathVariable("id") String id, ModelMap model) {
+
+        if (recipeService.findById(id) == null) {
+            throw new ResourceNotFoundException();
+        }
+
         model.put("recipe", recipeService.findById(id));
 
         return "recette";
+
+
     }
+
+    // On crée la réponse sans lui donner de contenu pour le moment
+//    $response = new Response();
+
+    // On définit le contenu
+  //  $response->setContent("Ceci est une page d'erreur 404");
+
+    // On définit le code HTTP à « Not Found » (erreur 404)
+  //  $response->setStatusCode(Response::HTTP_NOT_FOUND);
+
+    // On retourne la réponse
+  //  return $response;
+
 
     @RequestMapping("/contact")
     public String contact() {
